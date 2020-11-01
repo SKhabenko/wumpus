@@ -10,8 +10,9 @@ ACTION_DEFAULT = 'default'
 
 def action_shoot(user: User, maze: Maze) -> None:
     room_number = int(input('Куда стрелять? : '))
-    user.arrows_count -= 1
-    maze.user_shoot(room_number)
+    success_shot = maze.user_shoot(room_number)
+    if success_shot:
+        user.arrows_count -= 1
 
 
 def action_move(user: User, maze: Maze) -> None:

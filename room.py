@@ -28,7 +28,7 @@ class Room:
         """
         self._danger = danger
 
-    def is_danger_exists(self):
+    def is_danger_exists(self) -> bool:
         """ Есть ли что-то в этой комнате
         """
         return self._danger is not None
@@ -48,12 +48,15 @@ class Room:
         self._danger.action_description()
         return self._danger.action(user)
 
-    def create_shoot(self, user: User):
+    def create_shoot(self, user: User) -> bool:
+        """ Событие выстрела в комнату
+        """
         if not self.is_danger_exists():
             print('Вы выстрелили, но в комнате пусто')
-            return None
+            return False
         self._danger.on_shoot_description()
-        return self._danger.on_shoot(user)
+        self._danger.on_shoot(user)
+        return True
 
 
 def create_rooms() -> List[Room]:

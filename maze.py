@@ -44,14 +44,15 @@ class Maze:
             return
         self._user.set_room_number(room_number)
 
-    def user_shoot(self, room_number: int) -> None:
+    def user_shoot(self, room_number: int) -> bool:
         """ Выстрел пользователя в одну из ближайших комнат
         """
         if room_number not in self.available_user_moves():
             print('---\nДо туда стрела не доберется')
-            return
+            return False
         shooting_room = self._rooms[room_number]
-        shooting_room.create_shoot(self._user)
+        success = shooting_room.create_shoot(self._user)
+        return success
 
     def signs_in_current_room(self) -> Optional[list]:
         """ Возвращает список событий, которые триггерятся окружающими комнатами
